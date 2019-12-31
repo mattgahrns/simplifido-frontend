@@ -93,6 +93,9 @@ const Signup = () => {
             <div>
                 <label htmlFor="img_url">Image URL: </label>
                 <input type="text" name="img_url" placeholder="Image URL" />
+                <p>(Use <a href='https://imgur.com/'
+                target='_blank'>
+                imgur</a> to get a link)</p>
             </div>
             
             <input type="submit" value="Submit" />
