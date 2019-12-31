@@ -1,8 +1,19 @@
 import React from 'react';
 
-const Signup = () => {
+class Signup extends React.Component {
 
-    const statesArray = [
+    constructor() {
+        super();
+        this.state = {
+          username: '',
+          password: '',
+          city: '',
+          state: '',
+          img_url: ''
+        }
+    }
+    
+    statesArray = [
         'Alabama',
         'Alaska',
         'Arizona',
@@ -55,7 +66,7 @@ const Signup = () => {
         'Wyoming'
     ];
 
-    const selectStates = (statesArray) => {
+    selectStates = (statesArray) => {
         let count = 0;
         return statesArray.map(state => {
             return (
@@ -67,7 +78,13 @@ const Signup = () => {
         });
     }
 
-    const handleSubmit = (event) => {
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) => {
         event.preventDefault();
         fetch('http://localhost:3001/signup', {
             method: 'POST',
@@ -77,56 +94,65 @@ const Signup = () => {
             },
             body: JSON.stringify({
                 user: {
-                    username: event.target.username.value,
-                    password: event.target.password.value,
-                    email: event.target.email.value,
-                    city: event.target.city.value,
-                    state: event.target.state.value,
-                    img_url: event.target.img_url.value
+                    username: this.state.username,
+                    password: this.state.password,
+                    email: this.state.email,
+                    city: this.state.city,
+                    state: this.state.state,
+                    img_url: this.state.img_url
                 }
             })
         })
         .then(res => res.json())
-        .then(console.log);
+        .then(json => {
+            // console.log(json)
+            // console.log(json.jwt)
+            localStorage.setItem('token', json.jwt);
+            this.props.handleLogin();
+            // console.log(localStorage);
+        });
     }
 
-    return (
-        <form onSubmit={(event) => handleSubmit(event)}>
-            <h1>Sign Up</h1>
-            <div>
-                <label htmlFor="username">Username: </label>
-                <input type="text" name="username" placeholder="Username" />
-            </div>
-            <div>
-                <label htmlFor="password">Password: </label>
-                <input type="password" name="password" placeholder="Password" />
-            </div>
-            <div>
-                <label htmlFor="email">Email: </label>
-                <input type="text" name="email" placeholder="example@gmail.com" />
-            </div>
-            <div>
-                <label htmlFor="city">City: </label>
-                <input type="text" name="city" placeholder="City" />
-            </div>
-            <div>
-                <label htmlFor="state">State: </label>
-                <select name='state'>
-                    {selectStates(statesArray)}
-                </select>
-            </div>
-            <div>
-                <label htmlFor="img_url">Image URL: </label>
-                <input type="text" name="img_url" placeholder="Image URL" />
-                <p>(Use <a href='https://imgur.com/'
-                target='_blank'
-                rel='noopener noreferrer'>
-                imgur</a> to get a link)</p>
-            </div>
-            
-            <input type="submit" value="Submit" />
-        </form>
-    );
+    render(){
+        return (
+            <form onSubmit={(event) => this.handleSubmit(event)}>
+                <h1>Sign Up</h1>
+                <div>
+                    <label htmlFor="username">Username: </label>
+                    <input type="text" name="username" placeholder="Username" onChange={(event) => this.handleChange(event)}/>
+                </div>
+                <div>
+                    <label htmlFor="password">Password: </label>
+                    <input type="password" name="password" placeholder="Password" onChange={(event) => this.handleChange(event)}/>
+                </div>
+                <div>
+                    <label htmlFor="email">Email: </label>
+                    <input type="text" name="email" placeholder="example@gmail.com" onChange={(event) => this.handleChange(event)}/>
+                </div>
+                <div>
+                    <label htmlFor="city">City: </label>
+                    <input type="text" name="city" placeholder="City" onChange={(event) => this.handleChange(event)}/>
+                </div>
+                <div>
+                    <label htmlFor="state">State: </label>
+                    <select name='state' onChange={(event) => this.handleChange(event)}>
+                        {this.selectStates(this.statesArray)}
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="img_url">Image URL: </label>
+                    <input type="text" name="img_url" placeholder="Image URL" onChange={(event) => this.handleChange(event)}/>
+                    <p>(Use <a href='https://imgur.com/'
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    imgur</a> to get a link)</p>
+                </div>
+                
+                <input type="submit" value="Submit" />
+            </form>
+        );
+    }
+    
 }
 
 export default Signup;
