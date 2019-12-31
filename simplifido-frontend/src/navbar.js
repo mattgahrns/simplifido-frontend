@@ -22,6 +22,14 @@ const Navbar = () => {
       }}
     >Home</NavLink>
     <NavLink
+      to="/signup"
+      exact
+      style={link}
+      activeStyle={{
+        background: 'darkblue'
+      }}
+    >Sign Up</NavLink>
+    <NavLink
       to="/login"
       exact
       style={link}
