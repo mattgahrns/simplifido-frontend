@@ -59,14 +59,39 @@ const Signup = () => {
         let count = 0;
         return statesArray.map(state => {
             return (
-            <option value={state} key={count++}>
+            <option value={state} 
+            key={count++}
+            name={state}>
                 {state}
             </option>);
         });
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        fetch('http://localhost:3001/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: JSON.stringify({
+                user: {
+                    username: event.target.username.value,
+                    password_digest: event.target.password_digest.value,
+                    email: event.target.email.value,
+                    city: event.target.city.value,
+                    state: event.target.state.value,
+                    img_url: event.target.img_url.value
+                }
+            })
+        })
+        .then(res => res.json())
+        .then(console.log);
+    }
+
     return (
-        <form>
+        <form onSubmit={(event) => handleSubmit(event)}>
             <h1>Sign Up</h1>
             <div>
                 <label htmlFor="username">Username: </label>
@@ -74,7 +99,7 @@ const Signup = () => {
             </div>
             <div>
                 <label htmlFor="password">Password: </label>
-                <input type="password" name="password" placeholder="Password" />
+                <input type="password" name="password_digest" placeholder="Password" />
             </div>
             <div>
                 <label htmlFor="email">Email: </label>
@@ -86,7 +111,7 @@ const Signup = () => {
             </div>
             <div>
                 <label htmlFor="state">State: </label>
-                <select>
+                <select name='state'>
                     {selectStates(statesArray)}
                 </select>
             </div>
