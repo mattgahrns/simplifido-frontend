@@ -78,7 +78,7 @@ const Signup = () => {
             body: JSON.stringify({
                 user: {
                     username: event.target.username.value,
-                    password_digest: event.target.password_digest.value,
+                    password: event.target.password.value,
                     email: event.target.email.value,
                     city: event.target.city.value,
                     state: event.target.state.value,
@@ -99,7 +99,7 @@ const Signup = () => {
             </div>
             <div>
                 <label htmlFor="password">Password: </label>
-                <input type="password" name="password_digest" placeholder="Password" />
+                <input type="password" name="password" placeholder="Password" />
             </div>
             <div>
                 <label htmlFor="email">Email: </label>
