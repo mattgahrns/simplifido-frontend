@@ -30,12 +30,12 @@ const NavbarUser = (props) => {
       }}
     >Account</NavLink>
     <NavLink
-      to='/logout'
+      to='/'
       onClick={() => {localStorage.clear();
       props.handleLogout();}}
       style={link}
       activeStyle={{
-        background: 'darkblue'
+        background: 'blue'
       }}
     >Logout</NavLink>
   </div>);

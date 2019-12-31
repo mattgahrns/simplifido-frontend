@@ -28,10 +28,14 @@ class App extends React.Component {
     });
   }
 
+  getUser = () => {
+    
+  }
+
   render(){
     return (
       <Router>
-    { localStorage.token ? 
+    { localStorage.token? 
       <>
         <NavbarUser handleLogout={this.handleLogout}/>
         <Route exact path='/' component={Home} />
@@ -40,10 +44,8 @@ class App extends React.Component {
       <>
         <Navbar />
         <Route exact path='/' component={Home} />
-        <Route exact path='/signup' component={Signup} 
-        handleLogin={this.handleLogin}/>
-        <Route exact path='/login' component={Login}
-        handleLogin={this.handleLogin}/>
+        <Route exact path='/signup' render={(props) => <Signup {...props} handleLogin={this.handleLogin} />} />
+        <Route exact path='/login' render={(props) => <Login {...props} handleLogin={this.handleLogin} />} />
       </>
     }
     
