@@ -109,6 +109,7 @@ class Signup extends React.Component {
             // console.log(json.jwt)
             localStorage.setItem('token', json.jwt);
             this.props.handleLogin();
+            this.props.history.push("/")
             // console.log(localStorage);
         });
     }
