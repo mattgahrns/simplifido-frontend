@@ -37,7 +37,7 @@ class Login extends React.Component {
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json)
+            // console.log(json)
             if (!json.error) {
                 localStorage.setItem('token', json.jwt);
                 this.login()

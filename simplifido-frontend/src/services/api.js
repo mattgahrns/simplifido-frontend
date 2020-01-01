@@ -8,8 +8,8 @@ const headers = {
 }
 
 const getCurrentUser = () => {
-    console.log("%cCalled API", "color:red;")
-    console.log(headers)
+    // console.log("%cCalled API", "color:red;")
+    // console.log(headers)
     return fetch(`${url}/current_user`, {
         method: "GET",
         headers
