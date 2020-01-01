@@ -5,6 +5,7 @@ import Navbar from './navbar';
 import Login from './login';
 import Home from './home';
 import Signup from './signup';
+import { api } from './services/api' 
 import NavbarUser from './navbarUser';
 
 class App extends React.Component {
@@ -28,14 +29,29 @@ class App extends React.Component {
     });
   }
 
-  getUser = () => {
-    
+  componentDidMount() {
+    if (localStorage.getItem("token") != null)
+    api.auth.getCurrentUser().then((data) => {
+      if (!data.error) {
+        this.setState({
+          user: data
+        })
+      } else {
+        this.setState({
+          user: null
+        })
+      }
+    })
   }
+
+  // getUser = () => {
+  //   //fetch to the cuurrent_user route
+  // }
 
   render(){
     return (
       <Router>
-    { localStorage.token? 
+    { this.state.user && localStorage.getItem("token") ? 
       <>
         <NavbarUser handleLogout={this.handleLogout}/>
         <Route exact path='/' component={Home} />
