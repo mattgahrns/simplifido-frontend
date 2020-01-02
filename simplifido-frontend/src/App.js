@@ -55,7 +55,8 @@ class App extends React.Component {
         <Route exact path='/' component={Home} />
         <Route exact path='/account' render={(props) =>
         <Account {...props}/>} />
-        <Route exact path='/newpost' component={NewPost} />
+        <Route exact path='/newpost' render={(props) =>
+        <NewPost {...props}/>} />
       </>
       :
       <>

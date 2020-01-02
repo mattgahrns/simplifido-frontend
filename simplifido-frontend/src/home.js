@@ -36,6 +36,7 @@ class Home extends React.Component{
           <p>{post.description}</p>
           <p>By {post.user.username}</p>
           <p><strong>Contact info: </strong>{post.user.email}</p>
+          <br/>
         </div>
       )
     })

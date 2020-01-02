@@ -51,7 +51,7 @@ class NewPost extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(console.log);
+        .then(this.props.history.push("/"));
     }
 
     render(){
