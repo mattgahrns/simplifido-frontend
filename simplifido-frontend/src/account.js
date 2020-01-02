@@ -11,7 +11,8 @@ class Account extends React.Component {
             name: '',
             breed: '',
             age: '',
-            img_url: ''
+            img_url: '',
+            newDog: false
         }
     }
 
@@ -39,6 +40,7 @@ class Account extends React.Component {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({
                 dog: {
@@ -54,14 +56,10 @@ class Account extends React.Component {
         .then(console.log);
     }
 
-    pStyle = {
-        color: 'red'
-    }
-
     getDogs = () => {
-        return (
-            <p style={this.pStyle}>Dogs go here</p>
-        )
+        fetch(`http://localhost:3001/users/${this.state.user.id}/dogs`, {
+
+        })
     }
 
     render(){
@@ -75,7 +73,7 @@ class Account extends React.Component {
                 <h2>State: {state}</h2>
                 <h1>Your dogs: </h1>
                 <h2>(You can add more dogs below)</h2>
-                {this.getDogs()}
+                {/*this.getDogs()*/}
                 <h1>Add Dog:</h1>
                 <form onSubmit={(event) => {this.handleSubmit(event)}}>
                 <div>
@@ -89,6 +87,7 @@ class Account extends React.Component {
                 <div>
                     <label htmlFor="age">Age: </label>
                     <select name='age' onChange={(event) => this.handleChange(event)}>
+                        <option name='pleaseSelect' value='0'>Please Select</option>
                         <option name='1' value='1'>1</option>
                         <option name='2' value='2'>2</option>
                         <option name='3' value='3'>3</option>
