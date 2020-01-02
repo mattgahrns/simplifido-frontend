@@ -1,6 +1,6 @@
 import React from 'react';
 import { api } from './services/api'
-// import { Redirect } from 'react-router-dom';
+import Dog from './dog'
 
 class Account extends React.Component {
     
@@ -12,7 +12,7 @@ class Account extends React.Component {
             breed: '',
             age: '',
             img_url: '',
-            newDog: false
+            dogs: []
         }
     }
 
@@ -56,12 +56,6 @@ class Account extends React.Component {
         .then(console.log);
     }
 
-    getDogs = () => {
-        fetch(`http://localhost:3001/users/${this.state.user.id}/dogs`, {
-
-        })
-    }
-
     render(){
         const {username, email, city, state} = this.state.user;
         return(
@@ -73,7 +67,7 @@ class Account extends React.Component {
                 <h2>State: {state}</h2>
                 <h1>Your dogs: </h1>
                 <h2>(You can add more dogs below)</h2>
-                {/*this.getDogs()*/}
+                <Dog user_id='12'/>
                 <h1>Add Dog:</h1>
                 <form onSubmit={(event) => {this.handleSubmit(event)}}>
                 <div>

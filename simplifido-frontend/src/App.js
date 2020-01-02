@@ -8,6 +8,7 @@ import Signup from './signup';
 import { api } from './services/api' 
 import NavbarUser from './navbarUser';
 import Account from './account';
+import NewPost from './newpost';
 
 class App extends React.Component {
 
@@ -45,10 +46,6 @@ class App extends React.Component {
     })
   }
 
-  // getUser = () => {
-  //   //fetch to the cuurrent_user route
-  // }
-
   render(){
     return (
       <Router>
@@ -56,7 +53,9 @@ class App extends React.Component {
       <>
         <NavbarUser handleLogout={this.handleLogout}/>
         <Route exact path='/' component={Home} />
-        <Route exact path='/account' component={Account} />
+        <Route exact path='/account' component={Account} 
+        />
+        <Route exact path='/newpost' component={NewPost} />
       </>
       :
       <>
