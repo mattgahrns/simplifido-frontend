@@ -21,7 +21,7 @@ class Account extends React.Component {
         .then(data => {
             this.setState({
                 user: data
-            })
+            }, () => this.fetchDogs())
             // console.log(this.state.user);
         })
     }
@@ -53,10 +53,35 @@ class Account extends React.Component {
             })
         })
         .then(res => res.json())
-        .then(console.log);
+        .then(json => {
+            this.fetchDogs()
+        });
+    }
+
+    renderDog = () => {
+        return <Dog user_id={this.state.user.id} dogs={this.state.dogs}/>
+    }
+
+    fetchDogs = () => {
+        fetch(`http://localhost:3001/users/${this.state.user.id}/dogs`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+            })
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    dogs: json
+                })
+                // console.log(this.state.dogs.dogs);
+            })
     }
 
     render(){
+        // console.log("RENDER ACCOUNT")
         const {username, email, city, state} = this.state.user;
         return(
             <>
@@ -67,7 +92,7 @@ class Account extends React.Component {
                 <h2>State: {state}</h2>
                 <h1>Your dogs: </h1>
                 <h2>(You can add more dogs below)</h2>
-                <Dog user_id='12'/>
+                {this.state.user.id ? this.renderDog() : <p>Loading...</p>}
                 <h1>Add Dog:</h1>
                 <form onSubmit={(event) => {this.handleSubmit(event)}}>
                 <div>

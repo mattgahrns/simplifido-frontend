@@ -53,8 +53,8 @@ class App extends React.Component {
       <>
         <NavbarUser handleLogout={this.handleLogout}/>
         <Route exact path='/' component={Home} />
-        <Route exact path='/account' component={Account} 
-        />
+        <Route exact path='/account' render={(props) =>
+        <Account {...props}/>} />
         <Route exact path='/newpost' component={NewPost} />
       </>
       :
