@@ -30,6 +30,14 @@ const NavbarUser = (props) => {
       }}
     >New Post</NavLink>
     <NavLink
+      to="/myposts"
+      exact
+      style={link}
+      activeStyle={{
+        background: 'darkblue'
+      }}
+    >My Posts</NavLink>
+    <NavLink
       to="/account"
       exact
       style={link}

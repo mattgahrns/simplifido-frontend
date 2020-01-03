@@ -9,6 +9,7 @@ import { api } from './services/api'
 import NavbarUser from './navbarUser';
 import Account from './account';
 import NewPost from './newpost';
+import MyPosts from './myposts';
 
 class App extends React.Component {
 
@@ -57,6 +58,8 @@ class App extends React.Component {
         <Account {...props}/>} />
         <Route exact path='/newpost' render={(props) =>
         <NewPost {...props}/>} />
+        <Route exact path='/myposts' render={(props) =>
+        <MyPosts {...props}/>} />
       </>
       :
       <>
