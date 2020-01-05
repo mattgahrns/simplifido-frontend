@@ -28,10 +28,12 @@ class Home extends React.Component{
 
   getPosts = () => {
     return this.state.posts.map(post => {
+      // console.log(post);
       return (
         <div key={post.id}>
           <h2>{post.title}</h2>
           <h3>{post.activity}</h3>
+          <h3>{post.user.city}, {post.user.state}</h3>
           <h4>{post.when}</h4>
           <p>{post.description}</p>
           <p>By {post.user.username}</p>
