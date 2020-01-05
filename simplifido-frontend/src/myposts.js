@@ -50,10 +50,36 @@ class MyPosts extends React.Component {
               <p>{post.description}</p>
               <p>By {post.user.username}</p>
               <p><strong>Contact info: </strong>{post.user.email}</p>
+              <button id={post.id} onClick={(event) => this.handleEdit(event)}>Edit</button><button id={post.id} onClick={(event) => this.handleDelete(event)}>Delete</button>
               <br/>
             </div>
           )
         })
+    }
+
+    handleEdit = (event) => {
+        console.log(event.target.id);
+        // fetch(`http://localhost:3001/posts/${event.target.id}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         Accept: 'application/json',
+        //         Authorization: `Bearer ${localStorage.getItem('token')}`
+        //     }
+        // });
+    }
+
+    handleDelete = (event) => {
+        // console.log(event.target.id);
+        fetch(`http://localhost:3001/posts/${event.target.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(window.location.reload(false));
     }
 
 
@@ -61,6 +87,7 @@ class MyPosts extends React.Component {
         return(
             <>
                 <h1>My Posts</h1>
+                <hr/>
                 {this.state.user.id && this.state.posts.length > 0 ? this.getPosts() : <p>Loading...</p>}
             </>
         )
