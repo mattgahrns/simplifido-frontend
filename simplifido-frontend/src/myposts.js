@@ -59,15 +59,7 @@ class MyPosts extends React.Component {
     }
 
     handleEdit = (event) => {
-        console.log(event.target.id);
-        // fetch(`http://localhost:3001/posts/${event.target.id}`, {
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Accept: 'application/json',
-        //         Authorization: `Bearer ${localStorage.getItem('token')}`
-        //     }
-        // });
+        this.props.history.push(`/editpost/${event.target.id}`);
     }
 
     handleDelete = (event) => {
